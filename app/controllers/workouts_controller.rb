@@ -17,7 +17,7 @@ class WorkoutsController < ApplicationController
     if @workout.save
       redirect_to workout_path(@workout)
     else
-      redirect_to new_workout_path
+      redirect_to workouts_path
     end
   end
 
@@ -26,14 +26,18 @@ class WorkoutsController < ApplicationController
   end
 
   def update
-    @workout = Workout.find(params[:id])
-    @workout.update_attibutes(post_params)
-    redirect_to workout_path(@workout)
+    Workout.find(params[:id]).update_attibutes(workout_params)
+    redirect_to workout_path
   end
 
   def destroy
     Workout.find(params[:id]).destroy
     redirect_to workouts_path
   end
+
+  private
+    def workout_params
+      params.require(:workout).permit(:name, :description)
+    end
 
 end

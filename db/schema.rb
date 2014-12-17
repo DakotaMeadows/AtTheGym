@@ -21,8 +21,8 @@ ActiveRecord::Schema.define(version: 20141217144738) do
   end
 
   create_table "reps", force: true do |t|
-    t.integer  "workouts_id"
-    t.integer  "exercises_id"
+    t.integer  "workout_id"
+    t.integer  "exercise_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

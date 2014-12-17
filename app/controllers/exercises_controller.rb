@@ -1,19 +1,19 @@
 class ExercisesController < ApplicationController
 
   def index
-    @exercises = exercise.all
+    @exercises = Exercise.all
   end
 
   def show
-    @exercise = exercise.find(params[:id])
+    @exercise = Exercise.find(params[:id])
   end
 
   def new
-    @exercise = exercise.new
+    @exercise = Exercise.new
   end
 
   def create
-    @exercise = exercise.new(exercise_params)
+    @exercise = Exercise.new(exercise_params)
     if @exercise.save
       redirect_to exercise_path(@exercise)
     else
@@ -22,18 +22,24 @@ class ExercisesController < ApplicationController
   end
 
   def edit
-    @exercise = exercise.find(params[:id])
+    @exercise = Exercise.find(params[:id])
   end
 
   def update
-    @exercise = exercise.find(params[:id])
+    @exercise = Exercise.find(params[:id])
     @exercise.update_attibutes(post_params)
     redirect_to exercise_path(@exercise)
   end
 
   def destroy
-    exercise.find(params[:id]).destroy
+    Exercise.find(params[:id]).destroy
     redirect_to exercises_path
   end
+
+  private
+
+    def exercise_params
+      params.require(:exercise).permit(:name, :description)
+    end
 
 end
